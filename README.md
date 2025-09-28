@@ -1,4 +1,4 @@
-##🗨️ Multithreaded TCP Chat Application (C / Winsock)
+# 🗨️ Multithreaded TCP Chat Application (C / Winsock)
 
 ## Description
 A **real-time chat application** written in **C** using **TCP sockets (Winsock)**.  
