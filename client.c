@@ -36,7 +36,7 @@ int main(){
         fgets(line, sizeof(line), stdin);
         line[strcspn(line, "\n")] = 0;  // remove trailing newline
         snprintf(buffer, sizeof(buffer), "%s :- %s", name, line);
-        if (strcmp(line, "exit\n") == 0) {
+        if (strcmp(line, "exit") == 0) {
             break;
         }
         int amountsend = send(clientsock, buffer, (int)strlen(buffer), 0);   

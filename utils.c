@@ -42,13 +42,16 @@ struct acceptedclient* acceptedclientsocket(SOCKET serversock){
 void reciveandprintdata(struct acceptedclient* clientsocket){
      char buffer[1024];
     while(true){
-        size_t reciveddata = recv(clientsocket->acceptedsocket , buffer , 1024 , 0);
-        buffer[reciveddata] = 0;
-         printf("\n%s", buffer);
-        if(reciveddata == 0){
-            break;
+        int reciveddata = recv(clientsocket->acceptedsocket, buffer, 1024 - 1, 0);  // int (not size_t), room for \0
+        if(reciveddata <= 0){  // FIX: Check FIRST
+            if(reciveddata < 0){  // Log error
+               int err = WSAGetLastError();
+                printf("\nRecv error on client: %d (likely disconnect)\n", err);
+            }
+            break;  // Exit loop cleanly
         }
-       
+         buffer[reciveddata] = 0;
+         printf("\n%s", buffer);
         sendreciveddatatootherclients(buffer,clientsocket->acceptedsocket);
     }
     
@@ -82,7 +85,7 @@ void reciveingandprintinginSeperatethread(struct acceptedclient* clientsocket){
 void sendreciveddatatootherclients(char*buffer,SOCKET clientsock){
     for(int i = 0 ; i<countofacceptedclients ; i++){
         if(acceptedclientsarray[i].acceptedsocket != clientsock){ //not sending itself, though everyone else
-            send(acceptedclientsarray->acceptedsocket,buffer,strlen(buffer),0);
+            send(acceptedclientsarray[i].acceptedsocket,buffer,strlen(buffer),0);
         }
     }
 }
