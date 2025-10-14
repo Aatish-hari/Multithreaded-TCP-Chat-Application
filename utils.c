@@ -114,7 +114,7 @@ void *listenandwrite(void *arg) {
 //can use reciveandprintdata in place of this.
 void listeningandprintingotherclientsmessagesonnewThread(SOCKET clientsock){
     pthread_t newth;
-     SOCKET *pclientsock = malloc(sizeof(SOCKET));
+    SOCKET *pclientsock = malloc(sizeof(SOCKET));
     *pclientsock = clientsock;
     pthread_create(&newth,NULL,listenandwrite,pclientsock);
 }
