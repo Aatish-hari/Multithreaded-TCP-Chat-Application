@@ -24,7 +24,7 @@ int main(){
     else {
         printf("connection failed with server %d\n",result);
     }
-    listeningandprintingotherclientsmessagesonnewThread(clientsock);
+    
 
     char name[50];  // Allocate a buffer
     printf("Enter your name: ");
@@ -32,6 +32,7 @@ int main(){
     char line[1024];
     char buffer[1024];
     while (true) {
+        listeningandprintingotherclientsmessagesonnewThread(clientsock);
         printf("Enter Message (type 'exit' to exit):");
         fgets(line, sizeof(line), stdin);
         line[strcspn(line, "\n")] = 0;  // remove trailing newline
@@ -39,7 +40,7 @@ int main(){
         if (strcmp(line, "exit") == 0) {
             break;
         }
-        int amountsend = send(clientsock, buffer, (int)strlen(buffer), 0);   
+        int amountsend = send(clientsock, buffer, (int)strlen(buffer), 0);    
     }
 
      closesocket(clientsock);

@@ -51,7 +51,7 @@ void reciveandprintdata(struct acceptedclient* clientsocket){
             break;  // Exit loop cleanly
         }
          buffer[reciveddata] = 0;
-         printf("\n%s", buffer);
+         printf("\n%s\n", buffer);
         sendreciveddatatootherclients(buffer,clientsocket->acceptedsocket);
     }
     
@@ -98,7 +98,8 @@ void *listenandwrite(void *arg) {
         size_t reciveddata = recv(clientsock , buffer , 1024 , 0);
         if(reciveddata>0){
              buffer[reciveddata] = 0;
-        printf("\n%s", buffer);
+        printf("\n%s\n", buffer);
+        printf("Enter Message (type 'exit' to exit): ");
          sendreciveddatatootherclients(buffer,clientsock);
         }
        
