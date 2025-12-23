@@ -16,6 +16,8 @@ The project consists of three main parts:
 - **client.c** – Connects to the server and allows the user to send and receive chat messages.
 - **utils.c / utils.h** – Contains helper functions for socket creation, address setup, connection handling, and multithreading.
 
+  ![image alt](https://github.com/Aatish-hari/Multithreaded-TCP-Chat-Application/blob/main/working%20example.png?raw=true)
+
 It uses:
 - `Winsock2.h` for networking
 - `pthread` for handling multiple connections concurrently
